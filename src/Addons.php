@@ -36,36 +36,6 @@ abstract class Addons
      */
     final public function getConfig($name = '')
     {
-        static $_config = [];
-        if(empty($name)){
-            $name = $this->getName();
-        }
-        if(isset($_config[$name])){
-            return $_config[$name];
-        }
-
-        $map['name']    =   $name;
-        $map['status']  =   1;
-        $config  =   M('Addons')->where($map)->getField('config');
-        if($config){
-            $config   =   json_decode($config, true);
-        }else{
-            $config =   [];
-            $temp_arr = include $this->config_file;
-            foreach ($temp_arr as $key => $value) {
-                if($value['type'] == 'group'){
-                    foreach ($value['options'] as $gkey => $gvalue) {
-                        foreach ($gvalue['options'] as $ikey => $ivalue) {
-                            $config[$ikey] = $ivalue['value'];
-                        }
-                    }
-                }else{
-                    $config[$key] = $temp_arr[$key]['value'];
-                }
-            }
-        }
-        $_config[$name]     =   $config;
-        return $config;
     }
 
     /**
