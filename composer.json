@@ -14,7 +14,7 @@
   },
   "autoload": {
     "psr-4": {
-      "linkphp\\addons\\": "src"
+      "link\\addons\\": "src"
     }
   }
 }
